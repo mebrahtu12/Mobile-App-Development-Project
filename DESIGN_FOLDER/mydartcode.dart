@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:minifinance/edir_page.dart';
 import 'package:minifinance/ekub_page.dart';
-=======
-import 'package:flutter/material.dart';
-import 'package:minifinance/edirpage.dart';
-import 'package:minifinance/ekubpage.dart';
->>>>>>> 252255f4a8158b3c435e58a239eda3fa172eafd0
 import 'package:minifinance/main.dart';
 
 class Home extends StatelessWidget {
@@ -16,7 +10,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       backgroundColor: Colors.lightBlue[10],
       appBar: AppBar(
         title: Text('Home  Page'),
@@ -34,12 +27,6 @@ class Home extends StatelessWidget {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         ],
-=======
-      appBar: AppBar(
-        title: Text('Home  Page'),
-        centerTitle: true,
-        backgroundColor: Color(0x1fb50a0a),
->>>>>>> 252255f4a8158b3c435e58a239eda3fa172eafd0
       ),
       body: Center(
         child: Column(
