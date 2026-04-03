@@ -3,17 +3,28 @@ import 'package:minifinance/edir_confirm_password.dart';
 import 'package:minifinance/edir_login.dart';
 import 'package:minifinance/edir_admin_login_page.dart';
 
-class EdirResetPassword extends StatelessWidget {
-  EdirResetPassword({super.key});
+class EdirResetPassword extends StatefulWidget {
+  const EdirResetPassword({super.key});
 
+  @override
+  State<EdirResetPassword> createState() => _EdirResetPasswordState();
+}
+
+class _EdirResetPasswordState extends State<EdirResetPassword> {
   final TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose(); // IMPORTANT: prevents memory leaks
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("D-Edir"),
-        backgroundColor: Color(0xe4bcd987),
+        backgroundColor: const Color(0xe4bcd987),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25),
@@ -45,7 +56,6 @@ class EdirResetPassword extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            
             TextField(
               controller: emailController,
               decoration: InputDecoration(
@@ -59,7 +69,6 @@ class EdirResetPassword extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -69,15 +78,16 @@ class EdirResetPassword extends StatelessWidget {
 
                   if (email.isNotEmpty) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EdirConfirmPassword(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EdirConfirmPassword(),
+                      ),
+                    );
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          "Reset link sent successfully to $email plrase check your email",
+                          "Reset link sent successfully to $email please check your email",
                         ),
                         backgroundColor: Colors.green,
                       ),
@@ -100,7 +110,6 @@ class EdirResetPassword extends StatelessWidget {
 
             const SizedBox(height: 15),
 
-            
             TextButton(
               onPressed: () {
                 Navigator.push(
