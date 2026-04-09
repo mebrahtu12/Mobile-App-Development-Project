@@ -5,10 +5,22 @@ import 'package:minifinance/home.dart';
 import 'package:minifinance/login_page.dart';
 import 'package:minifinance/main.dart';
 
-class EkubResetPassword extends StatelessWidget {
-  EkubResetPassword({super.key});
+class EkubResetPassword extends StatefulWidget {
+  const EkubResetPassword({super.key});
+
+  @override
+  State<EkubResetPassword> createState() => _EkubResetPasswordState();
+}
+
+class _EkubResetPasswordState extends State<EkubResetPassword> {
 
   final TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +29,23 @@ class EkubResetPassword extends StatelessWidget {
         title: const Text("ekubNet"),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
-              },
-              icon: Icon(Icons.home))
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          )
         ],
-        backgroundColor: Color(0x8cb3c898),
+        backgroundColor: const Color(0x8cb3c898),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             const Icon(
               Icons.lock_reset,
               size: 80,
@@ -55,7 +71,6 @@ class EkubResetPassword extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            /// Email Field
             TextField(
               controller: emailController,
               decoration: InputDecoration(
@@ -69,12 +84,12 @@ class EkubResetPassword extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            /// Send Reset Link Button
             SizedBox(
               width: double.infinity,
               height: 50,
               child: FilledButton(
                 onPressed: () {
+
                   String email = emailController.text;
 
                   if (email.isNotEmpty) {
@@ -88,18 +103,23 @@ class EkubResetPassword extends StatelessWidget {
                     );
 
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EkubConfirmPassword(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EkubConfirmPassword(),
+                      ),
+                    );
+
                   } else {
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Please enter your email"),
                         backgroundColor: Colors.red,
                       ),
                     );
+
                   }
+
                 },
                 child: const Text(
                   "Send Reset Link",
@@ -110,7 +130,7 @@ class EkubResetPassword extends StatelessWidget {
 
             const SizedBox(height: 15),
 
-            /// Back to Login
+         
             TextButton(
               onPressed: () {
                 Navigator.push(
