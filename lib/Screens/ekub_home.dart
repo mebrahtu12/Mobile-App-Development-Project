@@ -10,53 +10,64 @@ class Ekub extends StatefulWidget {
 }
 
 class _EkubState extends State<Ekub> {
-  void showLoginPopup(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void showLoginPopup() {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: const Color.fromARGB(255, 198, 197, 197),
-          title: Center(child: Text("Join Ekub")),
+          title: const Center(child: Text("Join Ekub")),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: usernameController,
-                decoration: InputDecoration(labelText: "Username"),
+                decoration: const InputDecoration(labelText: "Username"),
               ),
               TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: InputDecoration(labelText: "Password"),
+                decoration: const InputDecoration(labelText: "Password"),
               ),
             ],
           ),
           actions: [
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[400],
-                foregroundColor: Colors.white,
-              ),
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[400],
-                foregroundColor: Colors.white,
-              ),
               onPressed: () {
+                if (usernameController.text.isEmpty ||
+                    passwordController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Please enter username and password"),
+                    ),
+                  );
+                  return;
+                }
+
+                Navigator.pop(context);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => FirstEkub()),
                 );
               },
-              child: Text("Login"),
+              child: const Text("Login"),
             ),
           ],
         );
@@ -64,88 +75,66 @@ class _EkubState extends State<Ekub> {
     );
   }
 
+  Widget buildButton(String text, VoidCallback onPressed) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      width: double.infinity,
+      height: 60,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green[400],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 500,
-            width: double.infinity,
-            child: Image.asset(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
               "assets/img/EkubLogo.jpg",
+              height: 350,
+              width: double.infinity,
               fit: BoxFit.cover,
-              color: Colors.white,
-              colorBlendMode: BlendMode.multiply,
             ),
-          ),
-          SizedBox(
-            height: 50,
-            child: Center(
-              child: Center(
-                child: Text(
-                  "Build Your Future",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            const SizedBox(height: 20),
+            const Text(
+              "Build Your Future",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          Builder(
-            builder: (context) {
-              return GestureDetector(
-                onTap: () {
-                  showLoginPopup(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  height: 80,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: Colors.green[400],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Join as Member",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-
-          Builder(
-            builder: (context) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
-                },
-                child: Container(
-                  height: 80,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    color: Colors.green[400],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Create New",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  buildButton("Join as Member", showLoginPopup),
+                  buildButton("Create New", () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegisterPage(),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
