@@ -149,6 +149,55 @@ class _EdirLoginPageState extends State<EdirLoginPage> {
                 ),
 
                 const SizedBox(height: 15),
+                const SizedBox(height: 20),
+
+/// Divider
+Row(
+  children: [
+    Expanded(child: Divider()),
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Text("OR"),
+    ),
+    Expanded(child: Divider()),
+  ],
+),
+
+const SizedBox(height: 20),
+
+/// Google Login Button
+SizedBox(
+  width: double.infinity,
+  height: 50,
+  child: OutlinedButton.icon(
+    onPressed: () {
+      // TODO: Implement Google Sign-In
+    },
+    icon: Icon(Icons.g_mobiledata, size: 28),
+    label: Text(
+      "Continue with Google",
+      style: TextStyle(fontSize: 16),
+    ),
+  ),
+),
+
+const SizedBox(height: 10),
+
+/// Facebook Login Button (Optional)
+SizedBox(
+  width: double.infinity,
+  height: 50,
+  child: OutlinedButton.icon(
+    onPressed: () {
+      
+    },
+    icon: Icon(Icons.facebook, color: Colors.blue),
+    label: Text(
+      "Continue with Facebook",
+      style: TextStyle(fontSize: 16),
+    ),
+  ),
+),
 
                 /// Forgot Password
                 Row(
