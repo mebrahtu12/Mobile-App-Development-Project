@@ -61,6 +61,12 @@ class HomePage extends StatelessWidget {
                 title: Text("About Us"),
                 onTap: () {
                   Navigator.pop(context);
+                }),
+                ListTile(
+                leading: Icon(Icons.privecy),
+                title: Text("Privecy"),
+                onTap: () {
+                  Navigator.pop(context);
                 })
           ],
         ),
