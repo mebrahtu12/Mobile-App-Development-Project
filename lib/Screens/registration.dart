@@ -9,6 +9,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
   final TextEditingController firstName = TextEditingController();
   final TextEditingController middleName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
@@ -17,6 +18,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController region = TextEditingController();
   final TextEditingController city = TextEditingController();
   final TextEditingController nationalId = TextEditingController();
+  bool isHidden = true;
+
 
   Widget buildTextField(String label, TextEditingController controller) {
     return Padding(
@@ -48,6 +51,36 @@ class _RegisterPageState extends State<RegisterPage> {
   void cancel() {
     Navigator.pop(context);
   }
+  void confirmRegister() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Confirm"),
+          content: const Text("Are you sure you want to register?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FirstEkub()),
+                );
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +113,43 @@ class _RegisterPageState extends State<RegisterPage> {
             buildTextField("Phone No", phone),
             buildTextField("Region", region),
             buildTextField("City", city),
-            buildTextField("National ID (FAN NO)", nationalId),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "NATIONAL ID (FAN NO)",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 6),
+                  TextField(
+                    controller: nationalId,
+                    obscureText: isHidden,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isHidden
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isHidden = !isHidden;
+                          });
+                        },
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,12 +166,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => FirstEkub()),
-                      );
-                    },
+
+                    onPressed: confirmRegister,
+
                     child: const Text("REGISTER"),
                   ),
                 ),
