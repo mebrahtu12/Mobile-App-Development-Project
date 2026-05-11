@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "72169792521",
+    "project_id": "ekubandedr",
+    "storage_bucket": "ekubandedr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72169792521:android:74668ab4b761c9ef0f84d8",
+        "android_client_info": {
+          "package_name": "com.Mad_App_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtrvTR5wbCKe8oUrrHXj8C7a9eYNYDEDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

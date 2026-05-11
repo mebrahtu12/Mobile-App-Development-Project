@@ -1,60 +1,43 @@
+import '../loginpage.dart';
 import 'package:flutter/material.dart';
-import 'Ekub/daily.dart';
-import 'Ekub/monthly.dart';
-import 'Ekub/weekly.dart';
 
-class PayWith extends StatefulWidget {
-  final String? ekubType;
-  const PayWith({super.key, this.ekubType});
+class PaymentMenthodPage extends StatefulWidget {
+  const PaymentMenthodPage({super.key});
 
   @override
-  State<PayWith> createState() => _PayWithState();
+  State<PaymentMenthodPage> createState() => _PaymentMenthodPageState();
 }
 
-class _PayWithState extends State<PayWith> {
+class _PaymentMenthodPageState extends State<PaymentMenthodPage> {
   List<String> myImages = [
     "assets/img/cbe.png",
     "assets/img/telebirr.png",
     "assets/img/dashen.png",
     "assets/img/awash.png",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        title: Center(child: Text("Payment")),
+        backgroundColor: Colors.green[300],
+        title: Text('PAY WITH', style: TextStyle(color: Colors.white)),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Map<String, Widget> pages = {
-              "Daily": Daily(),
-              "Weekly": Weekly(),
-              "Monthly": Monthly(),
-            };
-            Navigator.pushReplacement(
+            Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => pages[widget.ekubType]!),
+              MaterialPageRoute(builder: (context) => EkubLoginPage()),
             );
           },
+
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
-
-        actions: [Icon(Icons.menu, color: Colors.white)],
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 50,
-            child: Center(
-              child: Center(
-                child: Text(
-                  "PAY WITH",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
+          SizedBox(height: 150),
           Expanded(
             child: GridView.builder(
               itemCount: 4,
