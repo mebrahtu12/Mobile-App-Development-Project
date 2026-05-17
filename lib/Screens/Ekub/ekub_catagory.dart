@@ -24,15 +24,6 @@ class Catagory extends StatelessWidget {
           },
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 30, color: Colors.green[300]),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(30),

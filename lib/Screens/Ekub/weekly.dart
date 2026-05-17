@@ -6,7 +6,9 @@ import 'viewstatus.dart';
 import 'package:flutter/material.dart';
 //import 'ekub_dashbord.dart';
 import 'paymentt.dart';
-import '../admin/a_ekub_dashbord.dart';
+//import '../admin/a_ekub_dashbord.dart';
+import '../profile_screen.dart';
+import '../notifications_screen.dart';
 
 class Weekly extends StatelessWidget {
   const Weekly({super.key});
@@ -71,11 +73,31 @@ class Weekly extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+              );
+            },
+            icon: Icon(Icons.notifications),
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 30, color: Colors.green[300]),
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
+                  ),
+                );
+              },
+              child: const CircleAvatar(
+                radius: 16,
+                backgroundColor: Colors.white24,
+                child: Icon(Icons.person, size: 20, color: Colors.white),
+              ),
             ),
           ),
         ],

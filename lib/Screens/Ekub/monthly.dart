@@ -4,6 +4,8 @@ import 'winner_page.dart';
 import 'viewstatus.dart';
 import 'package:flutter/material.dart';
 import 'paymentt.dart';
+import '../profile_screen.dart';
+import '../notifications_screen.dart';
 
 class Monthly extends StatelessWidget {
   const Monthly({super.key});
@@ -68,12 +70,31 @@ class Monthly extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+              );
+            },
+            icon: Icon(Icons.notifications),
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 30, color: Colors.green[300]),
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
+                  ),
+                );
+              },
+              child: const CircleAvatar(
+                radius: 16,
+                backgroundColor: Colors.white24,
+                child: Icon(Icons.person, size: 20, color: Colors.white),
+              ),
             ),
           ),
         ],
